@@ -1,0 +1,1 @@
+Note: During automation of the OrangeHRM demo site, the initial login page occasionally returned a "CSRF token validation failed" response. Refreshing the page before login ensured a fresh CSRF token and stable execution. This behavior appears specific to the public demo environment and was not related to the Selenium framework implementation.

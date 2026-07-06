@@ -1,0 +1,9 @@
+# OrangeHRM - Login Module Test Cases
+
+| Test Case ID | Test Case Name | Scenario | Preconditions | Test Steps | Expected Result | Priority | Test Type | Automation Status |
+|---------------|----------------|----------|---------------|------------|-----------------|----------|-----------|-------------------|
+| TC_LOGIN_001 | Valid Login | Verify user can log in with valid credentials | User is registered and Login page is displayed | 1. Enter valid username.<br>2. Enter valid password.<br>3. Click **Login**. | User is redirected to the Dashboard successfully. | High | Functional | ✅ Automated |
+| TC_LOGIN_002 | Invalid Password | Verify login fails with incorrect password | Valid username exists | 1. Enter valid username.<br>2. Enter invalid password.<br>3. Click **Login**. | Error message **"Invalid credentials"** is displayed. | High | Negative | ✅ Automated |
+| TC_LOGIN_003 | Blank Username | Verify validation when username is blank | Login page is displayed | 1. Leave username blank.<br>2. Enter valid password.<br>3. Click **Login**. | User should not be logged in. Appropriate validation message should be displayed. | High | Validation | ✅ Automated |
+| TC_LOGIN_004 | Blank Password | Verify validation when password is blank | Login page is displayed | 1. Enter valid username.<br>2. Leave password blank.<br>3. Click **Login**. | User should not be logged in. Appropriate validation message should be displayed. | High | Validation | ✅ Automated |
+| TC_LOGIN_005 | Logout | Verify user can logout successfully | User is logged in | 1. Click Profile icon.<br>2. Click Logout. | User is redirected to the Login page. | High | Functional | ✅ Automated |
