@@ -11,7 +11,7 @@ public class loginTests extends DriverFactory
 {
 	
 	@Test(enabled=false)
-	public void TC1VerifyUserCanLogInWithValidCredentials() 
+	public void TC1_VerifyUserCanLogInWithValidCredentials() 
 	{		
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
@@ -22,7 +22,7 @@ public class loginTests extends DriverFactory
 	}
 	
 	@Test(enabled=false)
-	public void TC2VerifyLoginWithInvalidUsername()
+	public void TC2_VerifyLoginWithInvalidUsername()
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
@@ -33,7 +33,7 @@ public class loginTests extends DriverFactory
 	}
 	
 	@Test(enabled=false)
-	public void TC3VerifyLoginWithInvalidPassword()
+	public void TC3_VerifyLoginWithInvalidPassword()
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
@@ -44,7 +44,7 @@ public class loginTests extends DriverFactory
 	}
 	
 	@Test(enabled=false)
-	public void TC4VerifyLoginWithInvalidUsernameandInvalidPassword()
+	public void TC4_VerifyLoginWithInvalidUsernameandInvalidPassword()
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
@@ -54,4 +54,14 @@ public class loginTests extends DriverFactory
 		Assert.assertEquals(login.verifyInvalidCredentials(), "Invalid credentials");
 	}
 	
+	@Test
+	public void TC5_VerifyLoginWithBlankUsername()
+	{
+		loginPage login = new loginPage(driver);
+		String loginPageCheck = login.isLoginPageVisible();
+		Assert.assertEquals(loginPageCheck,"Login");
+		login.enterUsernameAndPassword("","admin123");
+		login.clickLoginButton();	
+		Assert.assertEquals(login.verifyRequiredCredentials(), "Required");
+	}
 }

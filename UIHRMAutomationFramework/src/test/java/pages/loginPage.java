@@ -25,6 +25,8 @@ public class loginPage
 	WebElement dashboardPageText;
 	@FindBy(xpath="//p[@class='oxd-text oxd-text--p oxd-alert-content-text']")
 	WebElement invalidCredentialsText;
+	@FindBy(xpath="//span[@class=\"oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message\" and text()='Required']")
+	WebElement requiredCredentialsText;
 	
 	public loginPage(WebDriver driver) {
 		this.driver = driver;
@@ -67,5 +69,10 @@ public class loginPage
 		public String verifyInvalidCredentials()
 		{
 			return invalidCredentialsText.getText();
+		}
+		
+		public String verifyRequiredCredentials()
+		{
+			return requiredCredentialsText.getText();
 		}
 }
