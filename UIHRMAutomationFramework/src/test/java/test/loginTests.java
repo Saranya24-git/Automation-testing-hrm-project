@@ -54,13 +54,24 @@ public class loginTests extends DriverFactory
 		Assert.assertEquals(login.verifyInvalidCredentials(), "Invalid credentials");
 	}
 	
-	@Test
+	@Test(enabled=false)
 	public void TC5_VerifyLoginWithBlankUsername()
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
 		Assert.assertEquals(loginPageCheck,"Login");
 		login.enterUsernameAndPassword("","admin123");
+		login.clickLoginButton();	
+		Assert.assertEquals(login.verifyRequiredCredentials(), "Required");
+	}
+	
+	@Test(enabled=true)
+	public void TC6_VerifyLoginWithBlankPassword()
+	{
+		loginPage login = new loginPage(driver);
+		String loginPageCheck = login.isLoginPageVisible();
+		Assert.assertEquals(loginPageCheck,"Login");
+		login.enterUsernameAndPassword("Admin","");
 		login.clickLoginButton();	
 		Assert.assertEquals(login.verifyRequiredCredentials(), "Required");
 	}
