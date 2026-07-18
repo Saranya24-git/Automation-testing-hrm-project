@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.DriverFactory;
+import pages.dashboardPage;
 import pages.loginPage;
 
 
@@ -18,7 +19,8 @@ public class loginTests extends DriverFactory
 		Assert.assertEquals(loginPageCheck,"Login");
 		login.enterUsernameAndPassword("Admin","admin123");
 		login.clickLoginButton();	
-		Assert.assertEquals(login.verifyDashBoard(), "Dashboard");
+		dashboardPage dashboard = new dashboardPage(driver);
+		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
 	}
 	
 	@Test(enabled=false)

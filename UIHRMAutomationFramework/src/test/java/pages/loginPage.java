@@ -20,9 +20,7 @@ public class loginPage
 	@FindBy(name="password")
 	WebElement passwordField;
 	@FindBy(xpath="//button[@type='submit']")
-	WebElement loginbtn;
-	@FindBy(xpath="//h6[text()='Dashboard']")
-	WebElement dashboardPageText;
+	WebElement loginbtn;	
 	@FindBy(xpath="//p[@class='oxd-text oxd-text--p oxd-alert-content-text']")
 	WebElement invalidCredentialsText;
 	@FindBy(xpath="//span[@class=\"oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message\" and text()='Required']")
@@ -57,14 +55,8 @@ public class loginPage
 			wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
 	
 			loginbtn.click();			
-		}
+		}	
 		
-		public String verifyDashBoard()
-		{
-			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));		
-			wait1.until(ExpectedConditions.visibilityOf(dashboardPageText));
-			return dashboardPageText.getText();
-		}
 		
 		public String verifyInvalidCredentials()
 		{
