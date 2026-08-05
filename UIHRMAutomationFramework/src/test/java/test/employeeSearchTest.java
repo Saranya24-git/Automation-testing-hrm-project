@@ -5,22 +5,26 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import annotations.TestDataSheet;
 import base.BaseTest;
 import constants.UIConstants;
+import datamodels.AddEmployeeData;
 import pages.PIMPage;
 import pages.addEmployeePage;
 import pages.dashboardPage;
 import pages.loginPage;
 
+@TestDataSheet(sheetName = "SearchEmployee",  model=SearchEmployeeData.class)
+
 public class employeeSearchTest extends BaseTest
 {
 	@Test(enabled=false)
-	public void TC15_SearchEmployeeByName()
+	public void TC15_SearchEmployeeByName(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
 		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
-		login.enterUsernameAndPassword("Admin","admin123");
+		login.enterUsernameAndPassword(,"admin123");
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
 		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);

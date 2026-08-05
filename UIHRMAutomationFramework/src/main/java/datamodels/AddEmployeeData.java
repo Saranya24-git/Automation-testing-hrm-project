@@ -42,19 +42,19 @@ public class AddEmployeeData {
 		this.lastName = lastName;
 	}
 
-	public String getEmpId() {
+	public String getEmpID() {
 		return empId;
 	}
 
-	public void setEmpId(String empId) {
+	public void setEmpID(String empId) {
 		this.empId = empId;
 	}
 
-	public String getLoginUsername() {
+	public String getLoginUserName() {
 		return loginUsername;
 	}
 
-	public void setLoginUsername(String loginUsername) {
+	public void setLoginUserName(String loginUsername) {
 		this.loginUsername = loginUsername;
 	}
 
