@@ -2,166 +2,174 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import base.DriverFactory;
+
+import annotations.TestDataSheet;
+import base.BaseTest;
+import constants.UIConstants;
+import dataProviders.TestDataProvider;
+import datamodels.AddEmployeeData;
+import datamodels.LoginData;
 import pages.dashboardPage;
 import pages.loginPage;
 import pages.PIMPage;
 import pages.addEmployeePage;
 
-public class addEmployeeTests extends DriverFactory
+@TestDataSheet(sheetName = "AddEmployee",  model=AddEmployeeData.class)
+public class addEmployeeTests extends BaseTest
 {
-	@Test(enabled=false)
-	public void TC08_VerifyAddEmployeewithvaliddetails() {
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	public void TC08_VerifyAddEmployeewithvaliddetails(String username, String password, String firstname, String lastname) {
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);		
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(),UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
-		addEmployee.enterFirstName("testcheck123");
-		addEmployee.enterLastName("test");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
+		addEmployee.enterFirstName(firstname);
+		addEmployee.enterLastName(lastname);
 		addEmployee.clickSaveButton();
-		Assert.assertEquals(pim.validateEmployeeName(), "testcheck123 test");		
+		Assert.assertEquals(pim.validateEmployeeName(), firstname + " " + lastname);		
 	}
 	
-	@Test(enabled=false)
-	public void TC09_VerifyAddEmployeeWithoutFirstName()
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+
+	public void TC09_VerifyAddEmployeeWithoutFirstName(String username, String password, String lastname)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(),UIConstants.DASHBOARD_PAGE_TITLE);
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
-		addEmployee.enterLastName("test");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
+		addEmployee.enterLastName(lastname);
 		addEmployee.clickSaveButton();
-		Assert.assertEquals(addEmployee.firstNameErrorMessage(), "Required");		
+		Assert.assertEquals(addEmployee.firstNameErrorMessage(), UIConstants.REQUIRED_TEXT);		
 	}
 	
-	@Test(enabled=false)
-	public void TC10_VerifyAddEmployeeWithoutLastName()
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	public void TC10_VerifyAddEmployeeWithoutLastName(String username, String password, String firstname)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);		
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
-		addEmployee.enterFirstName("testcheck123");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
+		addEmployee.enterFirstName(firstname);
 		addEmployee.clickSaveButton();
-		Assert.assertEquals(addEmployee.lastNameErrorMessage(), "Required");		
+		Assert.assertEquals(addEmployee.lastNameErrorMessage(), UIConstants.REQUIRED_TEXT);		
 	}
 	
-	@Test(enabled=false)
-	public void TC11_VerifyEmployeeIDautogenerated()
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	public void TC11_VerifyEmployeeIDautogenerated(String username, String password)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
-		Assert.assertNotNull(addEmployee.verifyAutoGeneratedEmployeeID(), "Employee ID should not be null");
-		Assert.assertFalse(addEmployee.verifyAutoGeneratedEmployeeID().trim().isEmpty(),"Employee ID should not be empty");
-		Assert.assertTrue(addEmployee.verifyAutoGeneratedEmployeeID().matches("\\d+"),"Employee ID should contain only digits");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
+		Assert.assertNotNull(addEmployee.verifyAutoGeneratedEmployeeID(), UIConstants.PIM_PAGE_EMPLOYEE_ID_NOT_NULL);
+		Assert.assertFalse(addEmployee.verifyAutoGeneratedEmployeeID().trim().isEmpty(),UIConstants.PIM_PAGE_EMPLOYEE_ID_NOT_EMPTY);
+		Assert.assertTrue(addEmployee.verifyAutoGeneratedEmployeeID().matches("\\d+"),UIConstants.PIM_PAGE_EMPLOYEE_ID_ONLY_DIGITS);
 	}
 	
-	@Test(enabled=false)
-	public void TC12_VerifyDuplicateEmployeeID()
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	public void TC12_VerifyDuplicateEmployeeID(String username, String password,String empID)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);		
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
-		addEmployee.enterExistingEmpID("0401");
-		Assert.assertEquals(addEmployee.empIDErrorMessage(), "Employee Id already exists");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
+		addEmployee.enterExistingEmpID(empID);
+		Assert.assertEquals(addEmployee.empIDErrorMessage(), UIConstants.PIM_PAGE_EMPLOYEE_ID_ALREADY_EXISTS);
 	}
 	
-	@Test(enabled=false)
-	public void TC13_VerifyAddEmployeewithLoginDetails()
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	public void TC13_VerifyAddEmployeewithLoginDetails(String username, String password, String firstname, String lastname, String loginusername,String loginpassword)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
-		addEmployee.enterFirstName("testcheck");
-		addEmployee.enterLastName("test");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
+		addEmployee.enterFirstName(firstname);
+		addEmployee.enterLastName(lastname);
 		addEmployee.switchOnLoginDetailsWrapper();
-		addEmployee.enterLoginDetails("testcheck1","testcheck1");
+		addEmployee.enterLoginDetails(loginusername,loginpassword);
 		addEmployee.clickSaveButton();
-		Assert.assertEquals(pim.validateEmployeeName(), "testcheck test");
+		Assert.assertEquals(pim.validateEmployeeName(), firstname + " " + lastname);
 		dashboard.clickProfileDropdown();
 		dashboard.clickLogoutButton();	
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("testcheck1","testcheck1");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(loginusername,loginpassword);
 		login.clickLoginButton();	
-		Assert.assertEquals(pim.verifyPIM(), "PIM");		
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);		
 	}
 	
-	@Test(enabled=false)
-	public void TC14_VerifyCancelButton()
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	public void TC14_VerifyCancelButton(String username, String password)
 	{
 		loginPage login = new loginPage(driver);
 		String loginPageCheck = login.isLoginPageVisible();
-		Assert.assertEquals(loginPageCheck,"Login");
-		login.enterUsernameAndPassword("Admin","admin123");
+		Assert.assertEquals(loginPageCheck,UIConstants.LOGIN_PAGE_TITLE);
+		login.enterUsernameAndPassword(username,password);
 		login.clickLoginButton();	
 		dashboardPage dashboard = new dashboardPage(driver);
-		Assert.assertEquals(dashboard.verifyDashBoard(), "Dashboard");
-		dashboard.PIMclick();
+		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE);
 		PIMPage pim = new PIMPage(driver);
-		Assert.assertEquals(pim.verifyPIM(), "PIM");
+		pim.PIMclick();
+		Assert.assertEquals(pim.verifyPIM(), UIConstants.PIM_PAGE_TITLE);
 		pim.clickAddEmplpyee();
 		addEmployeePage addEmployee = new addEmployeePage(driver);
-		Assert.assertEquals(addEmployee.addEmployeeText(), "Add Employee");
+		Assert.assertEquals(addEmployee.addEmployeeText(), UIConstants.PIM_PAGE_ADD_EMPLOYEE_TEXT);
 		addEmployee.clickCancelButton();
-		Assert.assertEquals(pim.validateEmployeeInfoText(),"Employee Information");
+		Assert.assertEquals(pim.validateEmployeeInfoText(),UIConstants.PIM_PAGE_EMPLOYEE_INFO_TITLE);
 	}
 	
 }

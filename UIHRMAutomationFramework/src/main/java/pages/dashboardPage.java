@@ -19,8 +19,7 @@ public class dashboardPage
 	WebElement profileDropDwn;
 	@FindBy(xpath="//a[text()=\"Logout\"]")
 	WebElement logoutButton;
-	@FindBy(xpath="//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='PIM']")
-	WebElement PIMOption;
+	
 	
 	public dashboardPage(WebDriver driver) {
 		this.driver = driver;
@@ -44,8 +43,5 @@ public class dashboardPage
 		logoutButton.click();
 	}
 	
-	public void PIMclick()
-	{
-		PIMOption.click();
-	}
+	
 }

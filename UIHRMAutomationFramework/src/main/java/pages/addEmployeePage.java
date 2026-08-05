@@ -2,7 +2,6 @@ package pages;
 
 import java.time.Duration;
 
-import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
