@@ -1,6 +1,7 @@
 package pages;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -36,13 +37,32 @@ public class PIMPage
 	WebElement empIDField;
 	@FindBy(xpath="//div[@class=\"oxd-table-row oxd-table-row--with-border oxd-table-row--clickable\"]//div[2]//div")
 	WebElement tableEmployeeID;	
-	@FindBy(xpath="//div[@class=\"oxd-table-body\"]")
+	@FindBy(xpath="//div[@class=\"oxd-table-body\"]//div[@class=\"oxd-table-card\"]")
 	List<WebElement> tableRows;
 	@FindBy(xpath="//label[text()=\"Employment Status\"]//..//..//div[@class=\"oxd-select-text--after\"]")
 	WebElement empStatusDropDown;
-	@FindBy(xpath="//label[text()=\"Employment Status\"]//..//..//div[@class=\"oxd-select-text-input\"]")
+	//@FindBy(xpath="//label[text()=\"Employment Status\"]//..//..//div[@class=\"oxd-select-text-input\"]")
+	//WebElement empStatusField;
+	@FindBy(xpath="//label[text()=\"Job Title\"]//..//..//div[@class=\"oxd-select-text--after\"]")
+	WebElement empJobTitleDropDown;
+	@FindBy(xpath="//label[text()=\"Supervisor Name\"]//..//..//div[@class=\"oxd-autocomplete-text-input oxd-autocomplete-text-input--active\"]//input")
+	WebElement empSupervisorNameField;
+	@FindBy(xpath="//span[@class=\"oxd-text oxd-text--span\" and text()=\"No Records Found\"]")
+	WebElement noRecordFoundText;
+	@FindBy(xpath="//div[@class=\"oxd-table-row oxd-table-row--with-border\"]//div[@role=\"columnheader\"]")
+	List<WebElement> tableheaders;
+	@FindBy(xpath="//nav[@role = \"navigation\" and @aria-label=\"Pagination Navigation\"]")
+	WebElement tablePagination;
+	@FindBy(xpath="//i[@class=\"oxd-icon bi-chevron-right\"]")
+	WebElement pageNavigationNextButton;
+	@FindBy(xpath="//button[@class=\"oxd-pagination-page-item oxd-pagination-page-item--page oxd-pagination-page-item--page-selected\"]")
+	WebElement currentPageNumber;
+	@FindBy(xpath="//button[@type=\"reset\"]")
+	WebElement resetButton;
+	@FindBy(xpath="//label[text()='Job Title']//ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
+	WebElement empJobField;
+	@FindBy(xpath="//label[text()='Employment Status']//ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
 	WebElement empStatusField;
-	
 	
 	public PIMPage(WebDriver driver) {
 		this.driver = driver;
@@ -114,14 +134,13 @@ public class PIMPage
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(25));
 		wait.until(ExpectedConditions.elementToBeClickable(empStatusDropdownField));
 		empStatusDropdownField.click();	
-		By selectedStatusLocator = By.xpath(
-			    "//label[text()='Employment Status']//ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]");
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(selectedStatusLocator,employeeStatus));
+		wait.until(ExpectedConditions.textToBePresentInElement(empStatusField,employeeStatus));
 	}
 	
-	public WebElement checkEmployeeStatusTable(String empId)
+	public WebElement checkEmployeeTable(String empId)
 	{
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOfAllElements(tableRows));
 		for(WebElement row:tableRows)
 		{
@@ -134,4 +153,105 @@ public class PIMPage
 		return null;
 	}
 	
+	public List<WebElement> checkEmployeeTableData()
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
+		return tableRows;
+	}
+	
+	public void searchByEmployeeJobTitle(String jobtitle)
+	{
+		empJobTitleDropDown.click();
+		WebElement empJobTitleDropdownField = driver.findElement(By.xpath("//div[@role=\"listbox\"]//span[text()=\"" +jobtitle+ "\"]"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", empJobTitleDropdownField);
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(25));
+		wait.until(ExpectedConditions.elementToBeClickable(empJobTitleDropdownField));
+		empJobTitleDropdownField.click();	
+		wait.until(ExpectedConditions.textToBePresentInElement(empJobField,jobtitle));
+	}
+	
+	public void searchByEmployeeSupervisorName(String supervisorname)
+	{
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(25));
+		empSupervisorNameField.sendKeys(supervisorname);
+		WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"//div[@role='listbox']//span[text()='" +
+						 supervisorname +
+						 "']")));		
+		option.click();		
+	}
+	
+	public String getNoRecordsFound()
+	{
+		return noRecordFoundText.getText();
+	}
+	
+	public List<String> getTableHeader()
+	{
+		List<String> headers = new ArrayList<>();
+		for(int i=1;i<tableheaders.size();i++)
+		{
+			headers.add(tableheaders.get(i).getText().trim());
+		}
+		return headers;		
+	}
+	
+	public boolean isPaginationAvailable()
+	{	
+		return tablePagination.isDisplayed();		
+	}
+	
+	public boolean isNoRecordsFoundDisplayed()
+	{
+		return !driver.findElements(
+	            By.xpath("//span[normalize-space()='No Records Found']"))
+	            .isEmpty();
+	}
+	
+	public boolean isNextButtonEnabled()
+	{
+		return pageNavigationNextButton.isDisplayed();
+	}
+	
+	public void clickNextButton()
+	{
+		pageNavigationNextButton.click();
+	}
+	
+	public String getCurrentPageNumber()
+	{
+		return currentPageNumber.getText();
+	}
+	
+	public void clickReset()
+	{
+		resetButton.click();
+	}
+	
+	public String getEmployeeNameValueAfterReset()
+	{
+		return empNameField.getDomProperty("value");				
+	}
+	
+	public String getEmployeeIdValueAfterReset()
+	{
+		return empIDField.getDomProperty("value");
+	}
+	
+	public String getEmployeeStatusAfterReset()
+	{
+		return empStatusField.getDomProperty("value");
+	}
+	
+	public String getEmployeeJobAfterReset()
+	{
+		return empJobField.getDomProperty("value");
+	}
+	
+	public String getEmployeeSupervisorAfterReset()
+	{
+		return empSupervisorNameField.getDomProperty("value");
+	}
 }
