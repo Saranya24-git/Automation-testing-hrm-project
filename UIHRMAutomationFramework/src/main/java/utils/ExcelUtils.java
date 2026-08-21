@@ -43,7 +43,6 @@ public class ExcelUtils
 	
 	public <T> T getTestData(String sheetName,String testCaseId, Class<T> modelClass) 
 		{
-			
 			Sheet sheet = workbook.getSheet(sheetName);			
 			int totalRows = sheet.getLastRowNum();
 			int totalColumns = sheet.getRow(0).getLastCellNum();
