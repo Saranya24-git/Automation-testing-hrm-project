@@ -254,4 +254,28 @@ public class PIMPage
 	{
 		return empSupervisorNameField.getDomProperty("value");
 	}
+	
+	public void editSearchedEmployeeProfile(String empId)
+	{
+		List<WebElement> rows = checkEmployeeTableData();
+		for(WebElement row : rows)
+		{
+			String employeeId = row.findElement(By.xpath(".//div[@role='cell'][2]"))
+                    .getText()
+                    .trim();
+			if(employeeId.equals(empId))
+			{
+				 WebElement editButton =
+			                row.findElement(
+			                    By.xpath(".//button//i[@class='oxd-icon bi-pencil-fill']")
+			                );
+
+			        editButton.click();
+			        break;
+			}
+		}
+		
+	}
+
 }
+

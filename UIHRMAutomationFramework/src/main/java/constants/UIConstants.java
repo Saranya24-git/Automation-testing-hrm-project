@@ -32,4 +32,6 @@ public class UIConstants
 		    "Sub Unit",
 		    "Supervisor",
 		    "Actions"));
+	public static final String REQUIRED_ERRRORMESSAGE = "Required";
+	public static final String SUCCESSFULLY_UPDATED_TEXT = "Successfully Updated";
 }
