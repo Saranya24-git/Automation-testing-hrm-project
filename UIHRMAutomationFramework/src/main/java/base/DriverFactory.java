@@ -13,7 +13,7 @@ public class DriverFactory {
         	
         	WebDriver driver = null;      
 
-        	String browser = ConfigReader.getProperty("browser");
+        	String browser = ConfigReader.get("browser");
         	
         	switch (browser.toLowerCase()) {
 

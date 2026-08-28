@@ -1,40 +1,58 @@
 package config;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
-import constants.PathConstants;
 
 public class ConfigReader
 {
-    private static Properties properties;
+	    private static final Properties properties = new Properties();
 
-    static
-    {
-    	try {
+	    static {
 
-            FileInputStream fis = new FileInputStream(PathConstants.CONFIG_PROPERTIES_PATH);
+	        String environment =
+	                System.getProperty("env", "qa").toLowerCase();
+	        
+	        if (!environment.equals("qa") &&
+	        	    !environment.equals("prod")) {
 
-            properties = new Properties();
+	        	    throw new IllegalArgumentException(
+	        	            "Unsupported environment: " + environment);
+	        	}
 
-            properties.load(fis);
+	        String fileName =
+	                "config-" + environment + ".properties";
 
-            fis.close();
+	        try (InputStream input =
+	                     ConfigReader.class.getClassLoader()
+	                             .getResourceAsStream(fileName)) {
 
-        }
-        catch (IOException e) {
+	            if (input == null) {
+	                throw new RuntimeException(
+	                        "Configuration file not found: "
+	                        + fileName);
+	            }
 
-            throw new RuntimeException("Unable to load config.properties", e);
+	            properties.load(input);
 
-        }    	
-    	
-    }
-    
-    public static String getProperty(String key) {
+	        } catch (IOException e) {
+	            throw new RuntimeException(
+	                    "Unable to load configuration: "
+	                    + fileName, e);
+	        }
+	    }
 
-	    return properties.getProperty(key);
+	    public static String get(String key) {
 
-	}
+	        String value = properties.getProperty(key);
+
+	        if (value == null) {
+	            throw new RuntimeException(
+	                    "Configuration key not found: " + key);
+	        }
+
+	        return value;
+	    }
 
 	
 

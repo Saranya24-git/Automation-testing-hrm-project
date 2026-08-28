@@ -230,7 +230,7 @@ public class updateEmployeeTest extends BaseTest
 				
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
 	public void TC31_VerifySuccessMessage(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);

@@ -15,7 +15,7 @@ public class BaseTest
  	public void Setup()
  	{
  		driver = DriverFactory.initDriver();
- 		driver.get(ConfigReader.getProperty("url"));
+ 		driver.get(ConfigReader.get("url"));
  		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
  	}
 	 
