@@ -1,6 +1,6 @@
 package pages;
 
-import java.time.Duration;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,9 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class jobDetailsPage
+
+import base.BasePage;
+
+public class jobDetailsPage extends BasePage
 {
 	WebDriver driver;
 	
@@ -25,7 +27,7 @@ public class jobDetailsPage
 	WebElement saveButton;
 	
 	public jobDetailsPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -37,7 +39,6 @@ public class jobDetailsPage
 	
 	public void updateJob(String jobtitle)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOf(empJobTitleDropDown));
 		empJobTitleDropDown.click();
@@ -52,7 +53,6 @@ public class jobDetailsPage
 	
 	public void clickSave()
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		saveButton.click();	
 	}

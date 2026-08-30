@@ -1,6 +1,5 @@
 package pages;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import base.BasePage;
+
 import org.openqa.selenium.JavascriptExecutor;
 
-public class PIMPage
+public class PIMPage extends BasePage
 {
 	WebDriver driver;
 	
@@ -65,7 +67,7 @@ public class PIMPage
 	WebElement empStatusField;
 	
 	public PIMPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -87,7 +89,6 @@ public class PIMPage
 	
 	public String validateEmployeeName()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		wait.until(ExpectedConditions.urlContains("viewPersonalDetails"));
 		wait.until(driver ->
         !employeeNameText.getText().trim().isEmpty());
@@ -131,7 +132,6 @@ public class PIMPage
 		WebElement empStatusDropdownField = driver.findElement(By.xpath("//div[@role=\"listbox\"]//span[text()=\"" +employeeStatus+ "\"]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", empStatusDropdownField);
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(25));
 		wait.until(ExpectedConditions.elementToBeClickable(empStatusDropdownField));
 		empStatusDropdownField.click();	
 		wait.until(ExpectedConditions.textToBePresentInElement(empStatusField,employeeStatus));
@@ -139,7 +139,6 @@ public class PIMPage
 	
 	public WebElement checkEmployeeTable(String empId)
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOfAllElements(tableRows));
 		for(WebElement row:tableRows)
@@ -155,7 +154,6 @@ public class PIMPage
 	
 	public List<WebElement> checkEmployeeTableData()
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		return tableRows;
 	}
@@ -166,7 +164,6 @@ public class PIMPage
 		WebElement empJobTitleDropdownField = driver.findElement(By.xpath("//div[@role=\"listbox\"]//span[text()=\"" +jobtitle+ "\"]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", empJobTitleDropdownField);
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(25));
 		wait.until(ExpectedConditions.elementToBeClickable(empJobTitleDropdownField));
 		empJobTitleDropdownField.click();	
 		wait.until(ExpectedConditions.textToBePresentInElement(empJobField,jobtitle));
@@ -174,7 +171,6 @@ public class PIMPage
 	
 	public void searchByEmployeeSupervisorName(String supervisorname)
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(25));
 		empSupervisorNameField.sendKeys(supervisorname);
 		WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 				"//div[@role='listbox']//span[text()='" +

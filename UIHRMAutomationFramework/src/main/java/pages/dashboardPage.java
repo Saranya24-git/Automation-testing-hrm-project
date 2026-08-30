@@ -1,15 +1,17 @@
 package pages;
 
-import java.time.Duration;
+
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class dashboardPage
+
+import base.BasePage;
+
+public class dashboardPage extends BasePage
 {
 	WebDriver driver;
 	
@@ -22,14 +24,13 @@ public class dashboardPage
 	
 	
 	public dashboardPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
 	public String verifyDashBoard()
 	{
-		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));		
-		wait1.until(ExpectedConditions.visibilityOf(dashboardPageText));
+		wait.until(ExpectedConditions.visibilityOf(dashboardPageText));
 		return dashboardPageText.getText();
 	}
 	

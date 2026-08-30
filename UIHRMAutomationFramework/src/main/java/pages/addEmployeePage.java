@@ -1,6 +1,6 @@
 package pages;
 
-import java.time.Duration;
+
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -9,9 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class addEmployeePage
+
+import base.BasePage;
+
+public class addEmployeePage extends BasePage
 {
 	WebDriver driver;
 	
@@ -45,7 +47,7 @@ public class addEmployeePage
 	
 	public addEmployeePage(WebDriver driver)
 	{
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -56,7 +58,6 @@ public class addEmployeePage
 	
 	public void enterFirstName(String firstname)
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(firstnametxtbox));
 		firstnametxtbox.sendKeys(firstname);
 	}
@@ -102,7 +103,6 @@ public class addEmployeePage
 	
 	public String empIDErrorMessage()
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.textToBePresentInElement(empIDErrorText, "Employee Id already exists"));
 		return empIDErrorText.getText();
 	}
@@ -115,7 +115,6 @@ public class addEmployeePage
 	
 	public void enterLoginDetails(String username, String password)
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(userNameTextBox));
 		userNameTextBox.sendKeys(username);
 		passwordTextBox.sendKeys(password);

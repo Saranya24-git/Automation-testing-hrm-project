@@ -1,6 +1,6 @@
 package pages;
 
-import java.time.Duration;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,9 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class personalDetailsPage
+
+import base.BasePage;
+ 
+public class personalDetailsPage extends BasePage
 {
 	WebDriver driver;
 	
@@ -30,13 +32,12 @@ public class personalDetailsPage
 		
 	
 	public personalDetailsPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
 	public void updateFirstName(String firstname)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOf(empFirstName));
 		empFirstName.click();
@@ -47,14 +48,12 @@ public class personalDetailsPage
 	
 	public void clickSave()
 	{
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		saveButton.click();	
 	}
 	
 	public void updateLastName(String lastname)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOf(empLastName));
 		empLastName.click();
@@ -65,7 +64,6 @@ public class personalDetailsPage
 	
 	public void updateEmployeeId(String employeeId)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOf(empId));
 		empId.click();
@@ -76,7 +74,6 @@ public class personalDetailsPage
 	
 	public String checkMandatoryForFirstName()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOf(empFirstName));
 		empFirstName.click();
@@ -87,7 +84,6 @@ public class personalDetailsPage
 	
 	public String getemployeeFirstName()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		wait.until(ExpectedConditions.visibilityOf(empFirstName));
 		return empFirstName.getDomProperty("value");
@@ -102,7 +98,6 @@ public class personalDetailsPage
 	public String verifySuccessMessage()
 	{
 		By successfullyUpdatedText = By.xpath("//*[contains(@class,'oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text')]");
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(successfullyUpdatedText)).getText();
 	}
 }
