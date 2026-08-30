@@ -2,45 +2,45 @@ package base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import config.ConfigReader;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory { 
         
-        public static WebDriver initDriver() {
-        	
-        	WebDriver driver = null;      
-
-        	String browser = ConfigReader.get("browser");
+        public static WebDriver createDriver(String browser, boolean headless) {
         	
         	switch (browser.toLowerCase()) {
 
             case "chrome":
-                driver = new ChromeDriver();
-                break;
+            	ChromeOptions chromeOptions = new ChromeOptions();
+
+                if (headless)
+                    chromeOptions.addArguments("--headless=new");
+
+                return new ChromeDriver(chromeOptions);            	
 
             case "edge":
-                driver = new EdgeDriver();
-                break;
+            	EdgeOptions edgeOptions = new EdgeOptions();
+
+                if (headless)
+                    edgeOptions.addArguments("--headless=new");
+
+                return new EdgeDriver(edgeOptions);
 
             case "firefox":
-                driver = new FirefoxDriver();
-                break;
+            	 FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+                 if (headless)
+                     firefoxOptions.addArguments("--headless");
+
+                 return new FirefoxDriver(firefoxOptions);
 
             default:
                 throw new RuntimeException("Browser not supported: " + browser);
         }
-
-            driver.manage().window().maximize();
-
-            return driver;
-    	}
-        
-       
-
-		
-       
-    
+        }
 }
+

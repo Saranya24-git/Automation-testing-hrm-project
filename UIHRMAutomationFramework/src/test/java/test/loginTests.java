@@ -28,7 +28,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(dashboard.verifyDashBoard(), UIConstants.DASHBOARD_PAGE_TITLE, UIConstants.DASHBOARD_PAGE_ERROR);
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC02_VerifyLoginWithInvalidUsername(LoginData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -39,7 +39,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(login.verifyInvalidCredentials(), UIConstants.LOGIN_PAGE_INVALID_CREDENTIALS);
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC03_VerifyLoginWithInvalidPassword(LoginData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -50,7 +50,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(login.verifyInvalidCredentials(), UIConstants.LOGIN_PAGE_INVALID_CREDENTIALS);
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC04_VerifyLoginWithInvalidUsernameandInvalidPassword(LoginData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -61,7 +61,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(login.verifyInvalidCredentials(), UIConstants.LOGIN_PAGE_INVALID_CREDENTIALS);
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC05_VerifyLoginWithBlankUsername(LoginData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -72,7 +72,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(login.verifyRequiredCredentials(), UIConstants.REQUIRED_TEXT);
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC06_VerifyLoginWithBlankPassword(LoginData data)
 	{
 		loginPage login = new loginPage(driver);

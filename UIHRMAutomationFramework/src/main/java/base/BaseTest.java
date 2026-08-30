@@ -14,8 +14,16 @@ public class BaseTest
 	 @BeforeMethod
  	public void Setup()
  	{
- 		driver = DriverFactory.initDriver();
- 		driver.get(ConfigReader.get("url"));
+		 String browser = ConfigReader.get("browser");
+
+		 boolean headless =Boolean.parseBoolean(ConfigReader.get("headless"));
+
+		 driver = DriverFactory.createDriver(browser, headless);
+		 
+		 driver.get(ConfigReader.get("url"));
+		 
+		 driver.manage().window().maximize();
+		 
  		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
  	}
 	 
