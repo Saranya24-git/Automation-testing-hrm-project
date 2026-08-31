@@ -20,18 +20,15 @@ public class BaseTest
 
 		 driver = DriverFactory.createDriver(browser, headless);
 		 
-		 driver.get(ConfigReader.get("url"));
+		 driver.get(ConfigReader.get("url"));	
 		 
-		 driver.manage().window().maximize();
-		 
- 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
  	}
 	 
 	 @AfterMethod
      public void tearDown() {
 
-         if(driver != null)
-             driver.quit();
+        DriverFactory.quitDriver(driver);
      }
 
 }

@@ -1,5 +1,6 @@
 package base;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,6 +13,8 @@ public class DriverFactory {
         
         public static WebDriver createDriver(String browser, boolean headless) {
         	
+        	WebDriver driver;
+        	
         	switch (browser.toLowerCase()) {
 
             case "chrome":
@@ -20,7 +23,8 @@ public class DriverFactory {
                 if (headless)
                     chromeOptions.addArguments("--headless=new");
 
-                return new ChromeDriver(chromeOptions);            	
+                driver =  new ChromeDriver(chromeOptions);      
+                break;
 
             case "edge":
             	EdgeOptions edgeOptions = new EdgeOptions();
@@ -28,7 +32,8 @@ public class DriverFactory {
                 if (headless)
                     edgeOptions.addArguments("--headless=new");
 
-                return new EdgeDriver(edgeOptions);
+               driver =  new EdgeDriver(edgeOptions);
+               break;
 
             case "firefox":
             	 FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -36,11 +41,26 @@ public class DriverFactory {
                  if (headless)
                      firefoxOptions.addArguments("--headless");
 
-                 return new FirefoxDriver(firefoxOptions);
+                 driver =  new FirefoxDriver(firefoxOptions);
+                 break;
 
             default:
                 throw new RuntimeException("Browser not supported: " + browser);
         }
+        	if (headless) {
+        	    driver.manage().window().setSize(new Dimension(1920, 1080));
+        	}
+        	else {
+        	    driver.manage().window().maximize();
+        	}
+        	return driver;
+        }
+        
+        public static void quitDriver(WebDriver driver) {
+
+            if (driver != null) {
+                driver.quit();
+            }
         }
 }
 
