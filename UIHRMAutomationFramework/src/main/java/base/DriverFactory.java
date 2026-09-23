@@ -10,10 +10,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory { 
-        
-        public static WebDriver createDriver(String browser, boolean headless) {
+    
+		private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+	
+		//createDriver() puts the correct driver into that thread's slot
+        public static void createDriver(String browser, boolean headless) {
         	
-        	WebDriver driver;
+        	WebDriver webDriver;
         	
         	switch (browser.toLowerCase()) {
 
@@ -23,7 +26,7 @@ public class DriverFactory {
                 if (headless)
                     chromeOptions.addArguments("--headless=new");
 
-                driver =  new ChromeDriver(chromeOptions);      
+                webDriver =  new ChromeDriver(chromeOptions);      
                 break;
 
             case "edge":
@@ -32,7 +35,7 @@ public class DriverFactory {
                 if (headless)
                     edgeOptions.addArguments("--headless=new");
 
-               driver =  new EdgeDriver(edgeOptions);
+                webDriver =  new EdgeDriver(edgeOptions);
                break;
 
             case "firefox":
@@ -41,19 +44,25 @@ public class DriverFactory {
                  if (headless)
                      firefoxOptions.addArguments("--headless");
 
-                 driver =  new FirefoxDriver(firefoxOptions);
+                 webDriver =  new FirefoxDriver(firefoxOptions);
                  break;
 
             default:
                 throw new RuntimeException("Browser not supported: " + browser);
         }
         	if (headless) {
-        	    driver.manage().window().setSize(new Dimension(1920, 1080));
+        		webDriver.manage().window().setSize(new Dimension(1920, 1080));
         	}
         	else {
-        	    driver.manage().window().maximize();
+        		webDriver.manage().window().maximize();
         	}
-        	return driver;
+        	
+        	driver.set(webDriver);
+        }
+
+        //getDriver() retrieves the driver belonging to the current thread
+        public static WebDriver getDriver() {
+            return driver.get();
         }
         
         public static void quitDriver(WebDriver driver) {

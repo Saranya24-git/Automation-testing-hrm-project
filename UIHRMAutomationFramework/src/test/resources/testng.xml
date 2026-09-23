@@ -1,0 +1,22 @@
+<suite name="OrangeHRM Suite"
+       parallel="classes"
+       thread-count="3"
+       verbose="2">
+
+    <test name="HRM Regression">
+
+      <!--  <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>-->
+
+        <packages>
+            <package name="test"/>
+        </packages>
+
+    </test>
+
+   
+</suite>
+

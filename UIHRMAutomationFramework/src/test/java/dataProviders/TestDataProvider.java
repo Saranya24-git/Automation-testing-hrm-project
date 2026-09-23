@@ -10,7 +10,8 @@ import utils.ExcelUtils;
 
 public class TestDataProvider
 {
-	@DataProvider(name="TestData")
+	//@DataProvider(parallel = true) : The same @Test method is invoked multiple times, once for each data row, and those invocations can run in parallel.
+	@DataProvider(name="TestData",parallel=true)
 	public Object[][] provideTestData(Method method) throws IOException
 	{
 	    ExcelUtils excel = new ExcelUtils();

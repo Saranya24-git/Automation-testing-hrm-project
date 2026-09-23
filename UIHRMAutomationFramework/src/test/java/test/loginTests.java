@@ -12,11 +12,11 @@ import pages.loginPage;
 import base.BaseTest;
 
 @TestDataSheet(sheetName = "Login",  model=LoginData.class)
-
+//@Test(groups = {"regression"})
 public class loginTests extends BaseTest
 {
 		
-	@Test(enabled=false,dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=true,dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
 	public void TC01_VerifyUserCanLogInWithValidCredentials(LoginData data) 
 	{		
 		loginPage login = new loginPage(driver);
@@ -39,7 +39,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(login.verifyInvalidCredentials(), UIConstants.LOGIN_PAGE_INVALID_CREDENTIALS);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC03_VerifyLoginWithInvalidPassword(LoginData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -50,7 +50,7 @@ public class loginTests extends BaseTest
 		Assert.assertEquals(login.verifyInvalidCredentials(), UIConstants.LOGIN_PAGE_INVALID_CREDENTIALS);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
+	@Test(enabled=true, dataProvider = "TestData",dataProviderClass = TestDataProvider.class)
 	public void TC04_VerifyLoginWithInvalidUsernameandInvalidPassword(LoginData data)
 	{
 		loginPage login = new loginPage(driver);

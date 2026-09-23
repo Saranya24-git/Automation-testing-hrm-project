@@ -14,7 +14,7 @@ public class BasePage
     
 	public BasePage(WebDriver driver) 
 	{
-		 this.driver = driver;
+		driver = DriverFactory.getDriver();
 
 	        int waitTime = Integer.parseInt(
 	                ConfigReader.get("explicitWait"));

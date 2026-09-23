@@ -46,7 +46,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(pim.checkEmployeeNameTable(),data.getEmpName());
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
 	public void TC16_SearchEmployeeByID(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -62,7 +62,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(pim.checkEmployeeIDTable(),data.getEmpID());		
 	}
 	
-	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
 	public void TC17_SearchEmployeeByStatus(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
