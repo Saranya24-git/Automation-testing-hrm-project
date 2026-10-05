@@ -3,6 +3,7 @@ package pages;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import base.BasePage;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 public class PIMPage extends BasePage
 {
@@ -65,6 +68,16 @@ public class PIMPage extends BasePage
 	WebElement empJobField;
 	@FindBy(xpath="//label[text()='Employment Status']//ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text-input')]")
 	WebElement empStatusField;
+	@FindBy(xpath="//div[@class=\"orangehrm-modal-header\"]")
+	WebElement deletePopupHeader;
+	@FindBy(xpath="//p[@class=\"oxd-text oxd-text--p oxd-text--card-body\"]")
+	WebElement deletePopupText;
+	@FindBy(xpath="//button[@class=\"oxd-button oxd-button--medium oxd-button--ghost orangehrm-button-margin\" and text()=\" No, Cancel \"]")
+	WebElement cancelButtonOnDeletePopup;
+	@FindBy(xpath="//button[@class=\"oxd-button oxd-button--medium oxd-button--label-danger orangehrm-button-margin\" and text()=\" Yes, Delete \"]")
+	WebElement confirmButtonOnDeletePopup;
+	@FindBy(xpath="//div[@class=\"orangehrm-horizontal-padding orangehrm-vertical-padding\"]//span[@class=\"oxd-text oxd-text--span\"]")
+	WebElement totalRecordsCount;
 	
 	public PIMPage(WebDriver driver) {
 		super(driver);
@@ -272,6 +285,101 @@ public class PIMPage extends BasePage
 		}
 		
 	}
+	
+	public void deleteSearchedEmployeeProfile(String empId)
+	{
+		List<WebElement> rows = checkEmployeeTableData();
+		for(WebElement row : rows)
+		{
+			String employeeId = row.findElement(By.xpath(".//div[@role='cell'][2]"))
+                    .getText()
+                    .trim();
+			if(employeeId.equals(empId))
+			{
+				WebElement checkbox = row.findElement(By.xpath(".//i[@class='oxd-icon bi-check oxd-checkbox-input-icon']"));
+				checkbox.click();				
+				 WebElement deleteButton =
+			                row.findElement(
+			                    By.xpath(".//button//i[@class='oxd-icon bi-trash']")
+			                );
 
+			        
+				 deleteButton.click();
+			        break;
+			}
+		}
+
+	}
+	
+	public void validateDeleteConfirmationPopup()
+	{
+		wait.until(ExpectedConditions.visibilityOf(deletePopupHeader));
+	}
+	
+	public String validateConfirmationPopupHeader()
+	{
+		return deletePopupHeader.getText();
+	}
+	
+	public String validateConfirmationPopupText()
+	{
+		return deletePopupText.getText();
+	}
+
+	public void clickCancelOnConfirmationPopup()
+	{
+		cancelButtonOnDeletePopup.click();
+	}
+	
+	public void clickConfirmOnConfirmationPopup()
+	{
+		confirmButtonOnDeletePopup.click();
+	}
+	
+	public String verifySuccessfullyDeletedMessage()
+	{
+		By successfullyDeletedText = By.xpath("//*[contains(@class,'oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text')]");
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(successfullyDeletedText)).getText();
+	}
+	
+	public int getTotalRecordsCount()
+	{
+		By recordsCount = By.xpath(
+		        "//span[contains(.,'Records Found')]"
+		);
+
+		 String recordText = wait.until(driver -> {
+
+		        try
+		        {
+		        	 WebElement element = driver.findElement(recordsCount);
+		        	 
+		            String text = element.getText().trim();
+		            
+		            if (text.isEmpty())
+		            {
+		                return null;
+		            }
+
+		            return text;
+
+		        }
+		        catch (NoSuchElementException | StaleElementReferenceException e)
+		        {
+		            return null;
+		        }
+		    });
+		
+		String numberText = recordText.replaceAll("[^0-9]", "");
+		
+		 if (numberText.isEmpty())
+		    {
+		        throw new RuntimeException(
+		                "Unable to extract record count from: "
+		                + recordText);
+		    }
+
+		    return Integer.parseInt(numberText);
+	}
 }
 

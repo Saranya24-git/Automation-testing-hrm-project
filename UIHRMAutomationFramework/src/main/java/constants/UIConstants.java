@@ -19,7 +19,7 @@ public class UIConstants
 	public static final String PIM_PAGE_EMPLOYEE_ID_ONLY_DIGITS = "Employee ID should contain only digits";
 	public static final String PIM_PAGE_EMPLOYEE_ID_ALREADY_EXISTS = "Employee Id already exists";
 	public static final String PIM_PAGE_EMPLOYEE_INFO_TITLE = "Employee Information";
-	public static final String PIM_PAGE_NO_RECORD_FOUND = "No Record Found";
+	public static final String PIM_PAGE_NO_RECORD_FOUND = "No Records Found";
 	public static final String PIM_PAGE_TABLE_HEADERS_INCORRECT = "Table headers are incorrect";
 	public static final String PIM_PAGE_TABLE_SHOULD_CONTAIN_RECORDS = "Employee table should contain records.";
 	public static final String PIM_PAGE_EMPLOYEE_NAME_NOT_EMPTY = "Employee Name should not be empty.";
@@ -34,4 +34,7 @@ public class UIConstants
 		    "Actions"));
 	public static final String REQUIRED_ERRRORMESSAGE = "Required";
 	public static final String SUCCESSFULLY_UPDATED_TEXT = "Successfully Updated";
+	public static final String DELETE_POPUP_HEADER ="Are you Sure?";
+	public static final String DELETE_POPUP_TEXT ="The selected record will be permanently deleted. Are you sure you want to continue?";
+	public static final String DELETE_SUCCESS_MESSAGE = "Successfully Deleted";
 }
