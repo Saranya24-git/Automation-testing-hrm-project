@@ -2,6 +2,8 @@ package pages;
 
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +16,10 @@ import base.BasePage;
 public class dashboardPage extends BasePage
 {
 	WebDriver driver;
+	
+	private static final Logger logger =
+	        LogManager.getLogger(dashboardPage.class);
+	
 	
 	@FindBy(xpath="//h6[text()='Dashboard']")
 	WebElement dashboardPageText;
@@ -32,11 +38,13 @@ public class dashboardPage extends BasePage
 	{
 		wait.until(ExpectedConditions.visibilityOf(dashboardPageText));
 		return dashboardPageText.getText();
+		
 	}
 	
 	public void clickProfileDropdown()
 	{
 		profileDropDwn.click();
+		logger.info("profile dropdown clicked");
 	}
 	
 	public void clickLogoutButton()

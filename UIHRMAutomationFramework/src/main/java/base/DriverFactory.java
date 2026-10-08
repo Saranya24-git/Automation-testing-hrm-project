@@ -1,5 +1,7 @@
 package base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,17 +12,28 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory { 
+	
+	 private static final Logger logger =
+	            LogManager.getLogger(DriverFactory.class);
+
     
 		private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	
 		//createDriver() puts the correct driver into that thread's slot
         public static void createDriver(String browser, boolean headless) {
         	
+        	logger.info(
+                    "Creating browser: {} | Headless: {}",
+                    browser,
+                    headless);
+        	
         	WebDriver webDriver;
         	
         	switch (browser.toLowerCase()) {
 
             case "chrome":
+            	
+            	logger.info("Initializing ChromeDriver");
             	ChromeOptions chromeOptions = new ChromeOptions();
 
                 if (headless)
@@ -30,6 +43,8 @@ public class DriverFactory {
                 break;
 
             case "edge":
+            	 logger.info("Initializing EdgeDriver");
+
             	EdgeOptions edgeOptions = new EdgeOptions();
 
                 if (headless)
@@ -39,6 +54,8 @@ public class DriverFactory {
                break;
 
             case "firefox":
+            	
+            	 logger.info("Initializing FirefoxDriver");
             	 FirefoxOptions firefoxOptions = new FirefoxOptions();
 
                  if (headless)
@@ -48,6 +65,9 @@ public class DriverFactory {
                  break;
 
             default:
+            	logger.error(
+                        "Unsupported browser: {}",
+                        browser);
                 throw new RuntimeException("Browser not supported: " + browser);
         }
         	if (headless) {
@@ -58,6 +78,9 @@ public class DriverFactory {
         	}
         	
         	driver.set(webDriver);
+        	logger.info(
+                    "WebDriver created successfully | Thread: {}",
+                    Thread.currentThread().getId());
         }
 
         //getDriver() retrieves the driver belonging to the current thread
@@ -68,6 +91,9 @@ public class DriverFactory {
         public static void quitDriver(WebDriver driver) {
 
             if (driver != null) {
+            	logger.info(
+                        "Closing WebDriver | Thread: {}",
+                        Thread.currentThread().getId());
                 driver.quit();
             }
         }

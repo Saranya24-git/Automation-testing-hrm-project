@@ -2,6 +2,8 @@ package pages;
 
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,10 @@ import base.BasePage;
 public class addEmployeePage extends BasePage
 {
 	WebDriver driver;
+	
+	private static final Logger logger =
+	        LogManager.getLogger(addEmployeePage.class);
+	
 	
 	@FindBy(xpath="//h6[@class=\"oxd-text oxd-text--h6 orangehrm-main-title\"]")
 	WebElement addEmplpyeeText;
@@ -65,6 +71,7 @@ public class addEmployeePage extends BasePage
 	public void enterLastName(String lastname)
 	{
 		lastnametxtbox.sendKeys(lastname);
+		logger.info("lastname entered as " , lastname);
 	}
 	
 	public void clickSaveButton()

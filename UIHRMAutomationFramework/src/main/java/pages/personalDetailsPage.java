@@ -2,6 +2,8 @@ package pages;
 
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,10 @@ import base.BasePage;
 public class personalDetailsPage extends BasePage
 {
 	WebDriver driver;
+	
+	private static final Logger logger =
+	        LogManager.getLogger(personalDetailsPage.class);
+	
 	
 	@FindBy(xpath="//input[@name='firstName']")
 	WebElement empFirstName;
@@ -44,6 +50,7 @@ public class personalDetailsPage extends BasePage
 		empFirstName.sendKeys(Keys.CONTROL, "a");
 		empFirstName.sendKeys(Keys.BACK_SPACE);
 		empFirstName.sendKeys(firstname);
+		logger.info("firstname field updated as ", firstname);
 	}
 	
 	public void clickSave()
@@ -70,6 +77,7 @@ public class personalDetailsPage extends BasePage
 		empId.sendKeys(Keys.CONTROL, "a");
 		empId.sendKeys(Keys.BACK_SPACE);
 		empId.sendKeys(employeeId);
+		logger.info("EmployeeId field updated as " , employeeId);
 	}
 	
 	public String checkMandatoryForFirstName()

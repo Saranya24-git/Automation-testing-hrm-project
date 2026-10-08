@@ -3,7 +3,8 @@ package pages;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,9 @@ import org.openqa.selenium.StaleElementReferenceException;
 public class PIMPage extends BasePage
 {
 	WebDriver driver;
+	
+	private static final Logger logger =
+	        LogManager.getLogger(PIMPage.class);
 	
 	@FindBy(xpath="//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='PIM']")
 	WebElement PIMOption;
@@ -131,6 +135,10 @@ public class PIMPage extends BasePage
 	
 	public void searchByEmployeeID(String employeeID)
 	{
+		
+		logger.info(
+	            "Searching employee with ID: {}",
+	            employeeID);
 		empIDField.sendKeys(employeeID);
 	}
 	
