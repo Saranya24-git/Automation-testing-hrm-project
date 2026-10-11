@@ -17,6 +17,10 @@ public class DriverFactory {
 	            LogManager.getLogger(DriverFactory.class);
 
     
+	    /*running multiple tests in parallel is not itself synchronization. 
+	    * separate ThreadLocal<WebDriver> instances help each test thread use its own browser, 
+	     * reducing conflicts over a shared WebDriver instance.*/
+	 
 		private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	
 		//createDriver() puts the correct driver into that thread's slot

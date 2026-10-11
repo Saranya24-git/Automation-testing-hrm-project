@@ -16,6 +16,16 @@
         </packages>
 
     </test>
+    
+    <listeners>
+        <listener class-name="reporting.ExtentReportListener"/>
+    </listeners>
+
+    <test name="OrangeHRM Tests">
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
 
    
 </suite>
