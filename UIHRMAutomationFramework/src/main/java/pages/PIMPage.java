@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
@@ -21,7 +20,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 
 public class PIMPage extends BasePage
 {
-	WebDriver driver;
+	
 	
 	private static final Logger logger =
 	        LogManager.getLogger(PIMPage.class);
@@ -50,8 +49,6 @@ public class PIMPage extends BasePage
 	List<WebElement> tableRows;
 	@FindBy(xpath="//label[text()=\"Employment Status\"]//..//..//div[@class=\"oxd-select-text--after\"]")
 	WebElement empStatusDropDown;
-	//@FindBy(xpath="//label[text()=\"Employment Status\"]//..//..//div[@class=\"oxd-select-text-input\"]")
-	//WebElement empStatusField;
 	@FindBy(xpath="//label[text()=\"Job Title\"]//..//..//div[@class=\"oxd-select-text--after\"]")
 	WebElement empJobTitleDropDown;
 	@FindBy(xpath="//label[text()=\"Supervisor Name\"]//..//..//div[@class=\"oxd-autocomplete-text-input oxd-autocomplete-text-input--active\"]//input")
@@ -85,7 +82,7 @@ public class PIMPage extends BasePage
 	
 	public PIMPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
+		initializeElements();
 	}
 	
 	public void PIMclick()

@@ -92,14 +92,23 @@ public class DriverFactory {
             return driver.get();
         }
         
-        public static void quitDriver(WebDriver driver) {
+        public static void quitDriver() {
 
-            if (driver != null) {
-            	logger.info(
-                        "Closing WebDriver | Thread: {}",
-                        Thread.currentThread().getId());
-                driver.quit();
-            }
+        	 WebDriver currentDriver = getDriver();
+
+        	    try {
+        	        if (currentDriver != null) {
+        	            logger.info(
+        	                "Closing WebDriver | Thread: {}",
+        	                Thread.currentThread().getId()
+        	            );
+
+        	            currentDriver.quit();
+        	        }
+        	    }
+        	    finally {
+        	    	driver.remove();
+        	    }
         }
 }
 

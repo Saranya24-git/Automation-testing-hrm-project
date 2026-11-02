@@ -7,7 +7,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
@@ -15,7 +14,7 @@ import base.BasePage;
 
 public class addEmployeePage extends BasePage
 {
-	WebDriver driver;
+	
 	
 	private static final Logger logger =
 	        LogManager.getLogger(addEmployeePage.class);
@@ -52,7 +51,7 @@ public class addEmployeePage extends BasePage
 	public addEmployeePage(WebDriver driver)
 	{
 		super(driver);
-		PageFactory.initElements(driver, this);
+		initializeElements();
 	}
 	
 	public String addEmployeeText()

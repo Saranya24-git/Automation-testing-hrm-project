@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
@@ -15,7 +14,7 @@ import base.BasePage;
 
 public class dashboardPage extends BasePage
 {
-	WebDriver driver;
+	
 	
 	private static final Logger logger =
 	        LogManager.getLogger(dashboardPage.class);
@@ -31,7 +30,7 @@ public class dashboardPage extends BasePage
 	
 	public dashboardPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
+		initializeElements();
 	}
 	
 	public String verifyDashBoard()

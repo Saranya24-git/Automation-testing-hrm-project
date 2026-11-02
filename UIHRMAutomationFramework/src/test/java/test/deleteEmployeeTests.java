@@ -19,7 +19,7 @@ import pages.loginPage;
 @TestDataSheet(sheetName = "DeleteEmployee",  model=DeleteData.class)
 public class deleteEmployeeTests extends BaseTest
 {
-	@Test(enabled=false,dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false,dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC32_VerifyThatAnExistingEmployeeCanBeDeletedSuccessfullyFromTheEmployeeList(DeleteData data) 
 	{	
 		loginPage login = new loginPage(driver);
@@ -38,7 +38,7 @@ public class deleteEmployeeTests extends BaseTest
 		pim.validateDeleteConfirmationPopup();		
 	}
 	
-	@Test(enabled=false,dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false,dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC33_VerifyThatAConfirmationPopupIsDisplayedWithAppropriateInformationBeforeDeletingAnEmployee(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -59,7 +59,7 @@ public class deleteEmployeeTests extends BaseTest
 		Assert.assertEquals(UIConstants.DELETE_POPUP_TEXT, pim.validateConfirmationPopupText());		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC34_VerifyThatClickingCancelInTheDeleteConfirmationPopupDoesNotDeleteTheEmployee(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -82,7 +82,7 @@ public class deleteEmployeeTests extends BaseTest
 		pim.deleteSearchedEmployeeProfile(data.getEmpID());
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC35_VerifyThatClickingConfirmInTheConfirmationPopupDeletesTheSelectedEmployee(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -105,7 +105,7 @@ public class deleteEmployeeTests extends BaseTest
 		Assert.assertEquals(UIConstants.DELETE_SUCCESS_MESSAGE, pim.verifySuccessfullyDeletedMessage());
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC36_VerifyThatTheDeletedEmployeeIsNoLongerPresentInTheEmployeeList(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -131,7 +131,7 @@ public class deleteEmployeeTests extends BaseTest
 		Assert.assertEquals(pim.getNoRecordsFound(),UIConstants.PIM_PAGE_NO_RECORD_FOUND);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC37_VerifyThatADeletedEmployeeCannotBeRetrievedThroughEmployeeSearch(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -150,7 +150,7 @@ public class deleteEmployeeTests extends BaseTest
 		Assert.assertEquals(rows.size(), 0);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC38_VerifyThatTheAppropriateNoRecordsMessageIsDisplayedWhenSearchingForADeletedEmployee(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -170,7 +170,7 @@ public class deleteEmployeeTests extends BaseTest
 		Assert.assertEquals(pim.getNoRecordsFound(),UIConstants.PIM_PAGE_NO_RECORD_FOUND);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC39_VerifyThatTheEmployeeCountDecreasesByOneAfterDeletingAnEmployee(DeleteData data)
 	{
 		loginPage login = new loginPage(driver);

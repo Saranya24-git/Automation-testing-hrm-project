@@ -11,13 +11,13 @@ import org.testng.annotations.BeforeMethod;
 import config.ConfigReader;
 
 public class BaseTest
-{
+{	
 	protected WebDriver driver;   
 	
-	private static final Logger logger =
+	protected static final Logger logger =
 	        LogManager.getLogger(BaseTest.class);
 	
-	 @BeforeMethod
+	 @BeforeMethod(alwaysRun=true)
  	public void Setup()
  	{
 		 logger.info(
@@ -25,13 +25,33 @@ public class BaseTest
 		            getClass().getSimpleName(),
 		            Thread.currentThread().getId());
 		 
+		 logger.info(
+			        "BASE SETUP STARTED | Thread: {}",
+			        Thread.currentThread().getId()
+			    );
+		 
 		 String browser = ConfigReader.get("browser");
 
 		 boolean headless =Boolean.parseBoolean(ConfigReader.get("headless"));
 		 
 		 DriverFactory.createDriver(browser, headless);
-
+		 
 		 driver = DriverFactory.getDriver();
+		 
+		 logger.info(
+			        "DriverFactory driver: {} | Thread: {}",
+			        driver,
+			        Thread.currentThread().getId()
+			    );
+		 
+		 if (driver == null) {
+		        throw new IllegalStateException(
+		            "DriverFactory returned null WebDriver"
+		        );
+		 }
+		 
+
+		 logger.info("BaseTest driver assigned: {}", driver);
 		 
 		 logger.info(
 		            "Navigating to URL: {}",
@@ -42,14 +62,19 @@ public class BaseTest
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
  	}
 	 
-	 @AfterMethod
+	 @AfterMethod(alwaysRun=true)
      public void tearDown() {
 
 		 logger.info(
 		            "Ending test: {} | Thread: {}",
 		            getClass().getSimpleName(),
 		            Thread.currentThread().getId());
-        DriverFactory.quitDriver(driver);
+		 try {
+		        DriverFactory.quitDriver();
+		    }
+		    finally {
+		        driver = null;
+		    }
      }
 
 }

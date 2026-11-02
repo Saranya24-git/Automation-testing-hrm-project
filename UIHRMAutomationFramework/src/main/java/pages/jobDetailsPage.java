@@ -9,7 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
@@ -17,7 +16,7 @@ import base.BasePage;
 
 public class jobDetailsPage extends BasePage
 {
-	WebDriver driver;
+	
 	
 	private static final Logger logger =
 	        LogManager.getLogger(jobDetailsPage.class);
@@ -34,7 +33,7 @@ public class jobDetailsPage extends BasePage
 	
 	public jobDetailsPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
+		initializeElements();
 	}
 	
 	

@@ -3,19 +3,19 @@
        thread-count="3"
        verbose="2">
 
-    <test name="HRM Regression">
+   <!-- <test name="HRM Regression">
 
-      <!--  <groups>
+       <groups>
             <run>
                 <include name="regression"/>
             </run>
-        </groups>-->
+        </groups>
 
         <packages>
             <package name="test"/>
         </packages>
 
-    </test>
+    </test>-->
     
     <listeners>
         <listener class-name="reporting.ExtentReportListener"/>

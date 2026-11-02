@@ -21,7 +21,7 @@ import pages.loginPage;
 
 public class searchEmployeeTest extends BaseTest
 {
-	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=true, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC15_SearchEmployeeByName(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -46,7 +46,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(pim.checkEmployeeNameTable(),data.getEmpName());
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC16_SearchEmployeeByID(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -62,7 +62,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(pim.checkEmployeeIDTable(),data.getEmpID());		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC17_SearchEmployeeByStatus(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -79,7 +79,7 @@ public class searchEmployeeTest extends BaseTest
 		String status = row.findElement(By.xpath(".//div//div[6]")).getText();
 		Assert.assertEquals(status, data.getEmpStatus());		
 	}
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC18_SearchEmployeeByJobTitle(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -97,7 +97,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(jobtitle, data.getJobTitle());
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC19_SearchByEmployeeSupervisorName(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -115,7 +115,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(supervisorname, data.getSupervisorName());
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC20_SearchByMultipleFilters(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -147,7 +147,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(supervisorname, data.getSupervisorName());	
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC21_SearchWithInvalidEmployeeName(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -166,7 +166,7 @@ public class searchEmployeeTest extends BaseTest
 		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC22_SearchWithInvalidEmpID(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -184,7 +184,7 @@ public class searchEmployeeTest extends BaseTest
 		Assert.assertEquals(pim.getNoRecordsFound(),UIConstants.PIM_PAGE_NO_RECORD_FOUND);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC23_SearchWithoutAnyFilters(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -229,7 +229,7 @@ public class searchEmployeeTest extends BaseTest
 	}
 	
 
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC24_ResetSearchFilters(SearchEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);

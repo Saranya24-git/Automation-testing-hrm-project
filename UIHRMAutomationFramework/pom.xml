@@ -10,6 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <testng.groups>regression</testng.groups>
 </properties>
 
 <dependencyManagement>
@@ -101,7 +102,23 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.5.6</version>
+    <configuration>
+        <groups>${testng.groups}</groups>
+
+        <!-- Preserve UI parallel execution -->
+        <parallel>classes</parallel>
+        <threadCount>3</threadCount>
+        <perCoreThreadCount>false</perCoreThreadCount>
+
+        <!-- Register the ExtentReports listener for Maven runs -->
+        <properties>
+            <property>
+                <name>listener</name>
+                <value>reporting.ExtentReportListener</value>
+            </property>
+        </properties>
+    </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
@@ -127,5 +144,21 @@
       </plugins>
     </pluginManagement>
   </build>
-  
+  <profiles>
+
+    <profile>
+        <id>smoke</id>
+        <properties>
+            <testng.groups>smoke</testng.groups>
+        </properties>
+    </profile>
+
+    <profile>
+        <id>regression</id>
+        <properties>
+            <testng.groups>regression</testng.groups>
+        </properties>
+    </profile>
+
+</profiles>
  </project>

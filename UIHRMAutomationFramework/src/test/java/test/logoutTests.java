@@ -14,7 +14,7 @@ import datamodels.LogoutData;
 
 public class logoutTests extends BaseTest
 {
-	@Test(enabled=true,dataProvider = "TestData", dataProviderClass = TestDataProvider.class)
+	@Test(enabled=true,dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC07_Logout(LogoutData data)
 	{
 		loginPage login = new loginPage(driver);
