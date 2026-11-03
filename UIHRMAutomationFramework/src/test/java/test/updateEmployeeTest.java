@@ -22,7 +22,7 @@ import pages.personalDetailsPage;
 
 public class updateEmployeeTest extends BaseTest
 {
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC25_UpdateFirstName(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -60,7 +60,7 @@ public class updateEmployeeTest extends BaseTest
 		}		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC26_UpdateLastName(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -98,7 +98,7 @@ public class updateEmployeeTest extends BaseTest
 		}		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC27_UpdateEmployeeId(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -131,7 +131,7 @@ public class updateEmployeeTest extends BaseTest
 		}		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC28_UpdateMultipleFields(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -179,7 +179,7 @@ public class updateEmployeeTest extends BaseTest
 		}		
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC29_MandatoryFieldValidation(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -200,7 +200,7 @@ public class updateEmployeeTest extends BaseTest
 		Assert.assertEquals(errorMessage, UIConstants.REQUIRED_ERRRORMESSAGE);
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
 	public void TC30_VerifyPersistance(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
@@ -230,7 +230,7 @@ public class updateEmployeeTest extends BaseTest
 				
 	}
 	
-	@Test(enabled=false, dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"smoke", "regression"})
 	public void TC31_VerifySuccessMessage(UpdateEmployeeData data)
 	{
 		loginPage login = new loginPage(driver);
