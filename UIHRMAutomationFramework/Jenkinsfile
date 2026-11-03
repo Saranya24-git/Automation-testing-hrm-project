@@ -30,16 +30,18 @@ pipeline {
         }
 
         stage('Run UI Smoke Tests') {
-            steps {
-                bat 'mvn -B clean test -Psmoke'
-            }
+    steps {
+        dir('UIHRMAutomationFramework') {
+            bat 'mvn -B clean test -Psmoke'
         }
+    }
+}
     }
 
     post {
-        always {
-            junit testResults: '**/target/surefire-reports/TEST-*.xml'
-        }
+    always {
+        junit testResults: 'UIHRMAutomationFramework/target/surefire-reports/TEST-*.xml'
+    }
 
         success {
             echo 'UI Smoke Tests completed successfully!'
