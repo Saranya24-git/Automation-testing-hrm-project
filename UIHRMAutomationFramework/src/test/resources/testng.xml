@@ -23,7 +23,7 @@
 
     <test name="OrangeHRM Tests">
         <packages>
-            <package name="tests"/>
+            <package name="test"/>
         </packages>
     </test>
 
