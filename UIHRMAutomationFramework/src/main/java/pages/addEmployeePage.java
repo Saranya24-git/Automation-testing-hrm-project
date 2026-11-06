@@ -75,6 +75,7 @@ public class addEmployeePage extends BasePage
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", saveButton);	
+		wait.until(ExpectedConditions.visibilityOf(saveButton));
 		saveButton.click();
 	}
 	
