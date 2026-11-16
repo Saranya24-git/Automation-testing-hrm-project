@@ -2,6 +2,8 @@ package pages;
 
 
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -57,7 +59,11 @@ public class personalDetailsPage extends BasePage
 	{
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView();", saveButton);	
+		js.executeScript(
+		        "arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+		        saveButton
+		    );	
+		wait.until(ExpectedConditions.elementToBeClickable(saveButton));
 		saveButton.click();	
 	}
 	

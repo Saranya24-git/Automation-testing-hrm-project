@@ -39,6 +39,7 @@ public class jobDetailsPage extends BasePage
 	
 	public void clickJobTab()
 	{
+		wait.until(ExpectedConditions.visibilityOf(jobTab));
 		jobTab.click();
 	}
 	

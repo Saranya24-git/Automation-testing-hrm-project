@@ -141,6 +141,8 @@ public class PIMPage extends BasePage
 	
 	public String checkEmployeeIDTable()
 	{
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".oxd-loading-spinner")));
+		wait.until(ExpectedConditions.visibilityOfAllElements(tableRows));
 		return tableEmployeeID.getText();
 	}
 	
