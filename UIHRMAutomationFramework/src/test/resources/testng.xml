@@ -1,7 +1,9 @@
-<suite name="OrangeHRM Suite"
+<!--<suite name="OrangeHRM Suite"
        parallel="classes"
        thread-count="3"
-       verbose="2">
+       verbose="2">-->
+       
+ <suite name="OrangeHRM Test Suite">      
 
    <!-- <test name="HRM Regression">
 

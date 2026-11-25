@@ -107,10 +107,10 @@
     <configuration>
         <groups>${testng.groups}</groups>
 		<failIfNoTests>true</failIfNoTests>
-        <!-- Preserve UI parallel execution -->
+        <!-- Preserve UI parallel execution 
         <parallel>classes</parallel>
         <threadCount>3</threadCount>
-        <perCoreThreadCount>false</perCoreThreadCount>
+        <perCoreThreadCount>false</perCoreThreadCount>-->
 
         <!-- Register the ExtentReports listener for Maven runs -->
         <properties>
