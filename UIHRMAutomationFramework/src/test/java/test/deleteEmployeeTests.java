@@ -193,8 +193,9 @@ public class deleteEmployeeTests extends BaseTest
 		pim.clickConfirmOnConfirmationPopup();
 		Assert.assertEquals(UIConstants.DELETE_SUCCESS_MESSAGE, pim.verifySuccessfullyDeletedMessage());
 		pim.PIMclick();
-		int totalRecordsCountAfterDeletion = pim.getTotalRecordsCount();
-		Assert.assertEquals(totalRecordsCountAfterDeletion, totalRecordsCount-1);
+		int expectedCount = totalRecordsCount - 1;
+		int totalRecordsCountAfterDeletion = pim.getTotalRecordsCount(expectedCount);
+		Assert.assertEquals(totalRecordsCountAfterDeletion, expectedCount);
 	}
 	
 	

@@ -388,5 +388,46 @@ public class PIMPage extends BasePage
 
 		    return Integer.parseInt(numberText);
 	}
+	
+	public int getTotalRecordsCount(int expectedCount) {
+
+	    By recordsCount = By.xpath(
+	        "//span[contains(.,'Records Found')]"
+	    );
+
+	    String recordText = wait.until(driver -> {
+
+	        try {
+
+	            WebElement element = driver.findElement(recordsCount);
+
+	            String text = element.getText().trim();
+
+	            if (text.isEmpty()) {
+	                return null;
+	            }
+
+	            String numberText = text.replaceAll("[^0-9]", "");
+
+	            if (numberText.isEmpty()) {
+	                return null;
+	            }
+
+	            int actualCount = Integer.parseInt(numberText);
+
+	            return actualCount == expectedCount ? text : null;
+
+	        }
+	        catch (NoSuchElementException |
+	               StaleElementReferenceException e) {
+
+	            return null;
+	        }
+	    });
+
+	    String numberText = recordText.replaceAll("[^0-9]", "");
+
+	    return Integer.parseInt(numberText);
+	}
 }
 
