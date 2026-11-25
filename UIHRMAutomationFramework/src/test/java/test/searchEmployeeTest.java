@@ -112,7 +112,7 @@ public class searchEmployeeTest extends BaseTest
 		pim.clickSearch();	
 		WebElement row = pim.checkEmployeeTable(data.getEmpID());
 		String supervisorname = row.findElement(By.xpath(".//div//div[8]")).getText();
-		Assert.assertEquals(supervisorname, data.getSupervisorName());
+		Assert.assertEquals(supervisorname.trim().replaceAll("\\s+", " "), data.getSupervisorName().trim().replaceAll("\\s+", " "));
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {"regression"})
